@@ -50,7 +50,7 @@ class Withdrawal(models.Model):
                 self.name = self.partner_id.name
                 targetId = self.partner_id.id
                 # find products id that has the given email registered as provider
-                supplierInfos = self.env['product.supplierinfo'].search([('partner_id', '=', targetId)])
+                supplierInfos = self.env['product.supplierinfo'].search([('name', '=', targetId)])
 
                 # find all products linked to the supplierInfos extracted + compute total HT
                 products = []
