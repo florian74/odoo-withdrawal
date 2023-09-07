@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_withdrawal">
+        <t t-foreach="docs" t-as="property">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+
+                        <!-- identity -->
+                        <div style="margin: 20px 0;">
+                            <h1>
+                                <span t-field="property.name"/>
+                            </h1>
+                            <strong><span t-field="property.mail" style="font-weight: 700;"/></strong>
+                        </div>
+
+                        <!-- items withdrawn -->
+                        <div>
+                            <h3>Withdrawn</h3>
+                            <table class="table" style="margin: 20px 0;">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left;">Name</th>
+                                        <th style="text-align: left;">Price</th>
+                                        <th style="text-align: left;">Barcode</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="property.products" t-as="product">
+                                        <t t-if="product.sales_count == 0">
+                                            <tr>
+                                                <td>
+                                                    <span t-field="product.name"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="product.list_price"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="product.barcode"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- details of sold items -->
+                        <div>
+                            <h3>Sold</h3>
+                            <table class="table" style="margin: 20px 0;">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left;">Name</th>
+                                        <th style="text-align: left;">Price</th>
+                                        <th style="text-align: left;">Unit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="property.products" t-as="product">
+                                        <t t-if="product.sales_count &gt; 0">
+                                            <tr>
+                                                <td>
+                                                    <span t-field="product.name"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="product.list_price"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="product.sales_count"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- table of total -->
+                        <div>
+                            <h3>Summary</h3>
+                            <table class="table" style="margin: 20px 0;">
+                                <tbody>
+                                   <tr style="background-color: transparent;">
+                                        <td>
+                                            <span>Total Earned</span>
+                                        </td>
+                                        <td style="padding: 0 15px;">
+                                            <span t-field="property.gain"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>Contribution Fees</span>
+                                        </td>
+                                        <td style="padding: 0 15px;">
+                                            <span t-field="property.fees"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>Due</span>
+                                        </td>
+                                        <td style="padding: 0 15px;">
+                                            <span t-field="property.total"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

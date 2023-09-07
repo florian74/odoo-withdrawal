@@ -1,0 +1,132 @@
+<odoo>
+  <data>
+
+    <!-- button action -->
+    <record id="withdrawal_model_action" model="ir.actions.act_window">
+      <field name="name">Withdraw Requests</field>
+      <field name="res_model">res.partner.withdrawal</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <!-- Add configuration option in data -->
+    <record id="res_config_settings_view_form_withdrawal" model="ir.ui.view">
+      <field name="name">res.config.settings.view.form.inherit.withdrawal</field>
+      <field name="model">res.config.settings</field>
+      <field name="priority" eval="10"/>
+      <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//div[hasclass('settings')]" position="inside">
+          <div class="app_settings_block"
+               string="Withdrawal"
+               data-string="Withdrawal"
+               data-key="odoo-withdrawal">
+            <h2>Withdrawal</h2>
+            <div class="row mt16 o_settings_container" name="withdrawal_setting_container">
+              <div class="col-12 col-lg-6 o_setting_box" id="variant_options">
+                <div class="o_setting_left_pane">
+                    <label for="contribution"/>
+                    <field name="contribution"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="action_withdrawal_config_settings" model="ir.actions.act_window">
+      <field name="name">Settings</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">res.config.settings</field>
+      <field name="view_id" ref="res_config_settings_view_form_withdrawal"/>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+      <field name="context">{'module' : 'odoo-withdrawal', 'bin_size': False}</field>
+    </record>
+
+    <!-- root menu, first displayed view seems to be the first valid path with action -->
+    <menuitem id="withdrawal_menu_root" name="Withdrawal" web_icon="odoo-withdrawal,static/description/icon.png">
+      <menuitem id="first_level_menu" action="withdrawal_model_action" name="Withdrawal"></menuitem>
+      <menuitem id="menu_withdrawal_config"
+                name="Configuration">
+          <menuitem id="menu_withdrawal_general_settings"
+                    name="Settings"
+                    action="action_withdrawal_config_settings"
+                    groups="base.group_system"
+          />
+      </menuitem>
+    </menuitem>
+
+    <!-- list view, that shoud be resolved by the action -->
+    <record model="ir.ui.view" id="withdrawalTree">
+      <field name="name">Withdrawal</field>
+      <field name="model">res.partner.withdrawal</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="mail"/>
+          <field name="date"/>
+        </tree>
+        
+      </field>
+      
+    </record>
+
+    <!-- report action that will be called by create_report function -->
+    <record id="action_withdrawal_pdf_report" model="ir.actions.report">
+      <field name="name">Withdrawal Report</field>
+      <field name="model">res.partner.withdrawal</field>
+      <field name="report_type">qweb-pdf</field>
+      <field name="report_name">odoo-withdrawal.report_withdrawal</field>
+      <field name="report_file">odoo-withdrawal.report_withdrawal</field>
+      <field name="print_report_name">'Products Withdrawal - %s' % (object.partner_id.name)</field>
+      <field name="binding_type">report</field>
+    </record>
+
+    <!-- form view that should be resolved by the action -->
+    <record model="ir.ui.view" id="withdrawal_unit_form">
+      <field name="name">Withdrawal</field>
+      <field name="model">res.partner.withdrawal</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <button name="create_report" type="object" string="PDF"/>
+          </header>
+          <sheet>
+          <!-- editable part of the form -->
+            <group string="Owner">
+                <field name="partner_id"/>
+                <field name="mail"/>
+            </group>
+            <!-- product listing display -->
+            <group string="Products"/>  
+            <field name="products">
+                  <tree>
+                    <field name="name"/>
+                    <field name="barcode" />
+                    <field name="list_price" widget='monetary' options="{'currency_field': 'currency_id'}" optional="show"/>
+                    <field name="sales_count"/>
+                  </tree>
+            </field>
+              
+            <group string="Sales total">
+              <field name="gain"/>
+              <field name="fees"/>
+              <field name="total"/>
+            </group>
+          </sheet>
+        </form>
+
+      </field>
+
+    </record>
+
+
+
+    
+
+    
+  </data>
+</odoo>
