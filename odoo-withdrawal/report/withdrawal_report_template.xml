@@ -30,23 +30,23 @@
                                     <t t-foreach="property.products" t-as="product">
                                         <t t-if="product.sales_count == 0">
                                             <tr style="border-bottom: none;">
-                                                <td style="border-bottom: none;">
+                                                <td style="border-bottom: none;border-right: none;">
                                                     <span t-field="product.name"/>
                                                 </td>
-                                                <td style="border-bottom: none;">
+                                                <td style="border-bottom: none;border-right: none;border-left: none;">
                                                     <span t-field="product.list_price"/>
                                                 </td>
-                                                <td style="border-bottom: none;">
+                                                <td style="border-bottom: none;border-right: none;border-left: none;">
                                                     <span t-field="product.barcode"/>
                                                 </td>
-                                                <td style="border-bottom: none;">
+                                                <td style="border-bottom: none;border-left: none;">
                                                     <t t.if="product.categ_id">
                                                         <span t-field="product.categ_id.name"/>
                                                     </t>
                                                 </td>
                                             </tr>
                                             <tr style="border-top: none;">
-                                                <td style="border-top: none;">
+                                                <td colspan="4" style="border-top: none;">
                                                     <span t-field="product.description"/>
                                                 </td>
                                             </tr>
