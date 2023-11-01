@@ -30,23 +30,23 @@
                                     <t t-foreach="property.products" t-as="product">
                                         <t t-if="product.sales_count == 0">
                                             <tr style="border-bottom: none;">
-                                                <td>
+                                                <td style="border-bottom: none;">
                                                     <span t-field="product.name"/>
                                                 </td>
-                                                <td>
+                                                <td style="border-bottom: none;">
                                                     <span t-field="product.list_price"/>
                                                 </td>
-                                                <td>
+                                                <td style="border-bottom: none;">
                                                     <span t-field="product.barcode"/>
                                                 </td>
-                                                <td>
+                                                <td style="border-bottom: none;">
                                                     <t t.if="product.categ_id">
                                                         <span t-field="product.categ_id.name"/>
                                                     </t>
                                                 </td>
                                             </tr>
                                             <tr style="border-top: none;">
-                                                <td>
+                                                <td style="border-top: none;">
                                                     <span t-field="product.description"/>
                                                 </td>
                                             </tr>
