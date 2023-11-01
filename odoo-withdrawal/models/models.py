@@ -10,7 +10,7 @@ _logger = logging.getLogger(__name__)
 class WithdrawalConfig(models.TransientModel):
     _inherit = 'res.config.settings'
     contribution = fields.Float(string="Retained Contribution (%)",
-                                default=10.0,
+                                default=0.0,
                                 config_parameter='odoo-withdrawal.contribution')
 
     def set_values(self):
