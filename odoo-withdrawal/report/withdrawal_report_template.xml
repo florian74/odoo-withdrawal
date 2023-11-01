@@ -29,7 +29,7 @@
                                 <tbody>
                                     <t t-foreach="property.products" t-as="product">
                                         <t t-if="product.sales_count == 0">
-                                            <tr>
+                                            <tr style="border-bottom: none;">
                                                 <td>
                                                     <span t-field="product.name"/>
                                                 </td>
@@ -45,7 +45,7 @@
                                                     </t>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr style="border-top: none;">
                                                 <td>
                                                     <span t-field="product.description"/>
                                                 </td>
