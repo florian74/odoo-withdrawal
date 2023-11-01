@@ -54,6 +54,7 @@
                                         <th style="text-align: left;">Name</th>
                                         <th style="text-align: left;">Price</th>
                                         <th style="text-align: left;">Unit</th>
+                                        <th style="text-align: left;">Category</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,6 +69,16 @@
                                                 </td>
                                                 <td>
                                                     <span t-field="product.sales_count"/>
+                                                </td>
+                                                <td>
+                                                    <t t.foreach="product.categ_id" t-as="category">
+                                                        <span t-field="category.name"/>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span t-field="product.description"/>
                                                 </td>
                                             </tr>
                                         </t>
